@@ -48,10 +48,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="50dp"
                         android:layout_marginLeft="50dp"
-                        android:text="Welcome Anonymous"
+                        android:text="@string/welcome_anonymous"
                         android:textColor="#FFFFFF"
                         android:textSize="30sp"
-                        />
+                        android:layout_margin="10dp"/>
 
                     <RelativeLayout
                         android:id="@+id/rxfczea2qrfg"
