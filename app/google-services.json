@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "709737746177",
+    "project_id": "rise-naba-unige",
+    "storage_bucket": "rise-naba-unige.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:709737746177:android:e08d1b9d0ea70addc61500",
+        "android_client_info": {
+          "package_name": "com.unige.rise"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "709737746177-fjkjh7vcmsbgj3ubpi15866rd6io98vd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.unige.rise",
+            "certificate_hash": "f0854d6a5a25ad8a95a17a160c7ebb1c23aa60b0"
+          }
+        },
+        {
+          "client_id": "709737746177-g2eimlkun2nllo3he4ajurugglp2ahe8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSrCYmDaEHoiF07eEEeI1w_JyPO_wURao"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "709737746177-g2eimlkun2nllo3he4ajurugglp2ahe8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
