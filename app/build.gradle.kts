@@ -73,4 +73,8 @@ dependencies {
 
     // if you target Android 12
     //implementation("com.google.android.gms:play-services-auth:21.2.0")
+
+    // Firebase Cloud Storage
+    //implementation("com.google.firebase:firebase-storage")
+    implementation("com.google.firebase:firebase-storage:21.0.0")
 }

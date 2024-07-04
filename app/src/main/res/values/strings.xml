@@ -19,4 +19,9 @@
     <string name="navigation_header">Navigation header</string>
     <string name="std_nav_name_surname">Name Surname</string>
     <string name="std_nav_email">rise@project.com</string>
+    <string name="test">Test</string>
+    <string name="etf">Cosa sono gli ETF</string>
+    <string name="etf_subtitle">Rise presenta la guida all’inflazione, esplorando e chiarendo...</string>
+    <string name="guarda_tutte_le_guide">Guarda tutte le guide</string>
+    <string name="corsi">Corsi</string>
 </resources>
