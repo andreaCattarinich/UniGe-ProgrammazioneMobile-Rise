@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.ktx.auth
@@ -27,13 +26,14 @@ class HomeFragment : Fragment() {
         val root: View = binding.root
 
         // Set user information in the fragment
-        /*
         val user = Firebase.auth.currentUser
         user?.let {
-            binding.navNameSurname.text = it.displayName
-            binding.navEmail.text = it.email
+            val name = it.displayName?.split(" ")?.first()
+            if (name != null) {
+                binding.homeWelcome.text = "Welcome ${name}"
+            }
         }
-        */
+
         return root
     }
 
