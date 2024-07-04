@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group
+        android:checkableBehavior="single">
+
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/baseline_home_24"
@@ -11,6 +13,17 @@
         <item
             android:id="@+id/nav_quiz"
             android:icon="@drawable/baseline_quiz_24"
-            android:title="Quiz" />
+            android:title="@string/quiz" />
     </group>
+
+    <item
+        android:title="">
+
+        <menu>
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/baseline_logout_24"
+                android:title="@string/logout"/>
+        </menu>
+    </item>
 </menu>

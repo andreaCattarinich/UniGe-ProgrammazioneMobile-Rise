@@ -26,11 +26,6 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = "AIUTATEMI"
-        }
-
         // Set user information in the fragment
         /*
         val user = Firebase.auth.currentUser
