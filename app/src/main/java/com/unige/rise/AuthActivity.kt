@@ -35,7 +35,7 @@ class AuthActivity : AppCompatActivity() {
         val providers = when (signInMethod) {
             "email" -> arrayListOf(AuthUI.IdpConfig.EmailBuilder().build())
             "google" -> arrayListOf(AuthUI.IdpConfig.GoogleBuilder().build())
-            "anonymous" -> arrayListOf(AuthUI.IdpConfig.AnonymousBuilder().build())
+            "anonymous" -> arrayListOf(AuthUI.IdpConfig.AnonymousBuilder().build()) // TODO: not works
             else -> throw IllegalArgumentException("Illegal sign-in method: ($signInMethod)")
         }
         startFirebaseUIAuth(providers)

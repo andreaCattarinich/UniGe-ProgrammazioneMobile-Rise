@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
 
     <fragment
-        android:id="@+id/homeFragment"
+        android:id="@+id/nav_home"
         android:name="com.unige.rise.HomeFragment"
-        android:label="fragment_home"
+        android:label="Home"
         tools:layout="@layout/fragment_home" />
+
     <fragment
-        android:id="@+id/quizFragment"
+        android:id="@+id/nav_quiz"
         android:name="com.unige.rise.QuizFragment"
-        android:label="fragment_quiz"
+        android:label="Quiz"
         tools:layout="@layout/fragment_quiz" />
+
 </navigation>

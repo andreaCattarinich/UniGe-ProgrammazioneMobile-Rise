@@ -1,38 +1,49 @@
 package com.unige.rise
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.google.firebase.Firebase
-import com.google.firebase.auth.auth
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import com.unige.rise.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
 
-    // TODO: control if I need Safe Args
-    //val args : DataFragmentArgs by navArgs()
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val homeViewModel =
+            ViewModelProvider(this).get(HomeViewModel::class.java)
 
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        val root: View = binding.root
 
-        val welcome = view.findViewById<TextView>(R.id.home_welcome)
-        //val name = getIntent().getExtras().getString("USER")
-
-        val user = Firebase.auth.currentUser
-        user?.let {
-            val name = it.displayName?.split(" ")
-            if (name != null) {
-                welcome.text = "Welcome ${name.first()}"
-            }
+        val textView: TextView = binding.textHome
+        homeViewModel.text.observe(viewLifecycleOwner) {
+            textView.text = "AIUTATEMI"
         }
 
-        return view
+        // Set user information in the fragment
+        /*
+        val user = Firebase.auth.currentUser
+        user?.let {
+            binding.navNameSurname.text = it.displayName
+            binding.navEmail.text = it.email
+        }
+        */
+        return root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
