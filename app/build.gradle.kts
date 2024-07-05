@@ -77,4 +77,8 @@ dependencies {
     // Firebase Cloud Storage
     //implementation("com.google.firebase:firebase-storage")
     implementation("com.google.firebase:firebase-storage:21.0.0")
+
+    // Firebase Realtime Database
+    implementation("com.google.firebase:firebase-database-ktx:21.0.0")
+
 }
