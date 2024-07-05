@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:background="#FFFFFFFF"
         android:clipChildren="false"
@@ -40,14 +39,15 @@
 
                 <TextView
                     android:id="@+id/home_welcome"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="50dp"
+                    android:layout_margin="10dp"
                     android:layout_marginLeft="50dp"
+                    android:layout_marginRight="50dp"
                     android:text="@string/welcome_anonymous"
                     android:textColor="#FFFFFF"
                     android:textSize="30sp"
-                    android:layout_margin="10dp"/>
+                    android:textAlignment="center"/>
 
                 <TextView
                     android:id="@+id/rnhk5xhi129"
@@ -61,7 +61,6 @@
 
                 <!-- Course 1 -->
                 <LinearLayout
-                    android:id="@+id/course1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/home_shape1"
@@ -72,6 +71,7 @@
                     android:clipToPadding="false"
                     android:orientation="vertical">
                     <LinearLayout
+                        android:id="@+id/img_course1"
                         android:layout_width="match_parent"
                         android:layout_height="184dp"
                         android:background="@drawable/home_shape2"
@@ -111,6 +111,7 @@
                     android:clipToPadding="false"
                     android:orientation="vertical">
                     <LinearLayout
+                        android:id="@+id/img_course2"
                         android:layout_width="match_parent"
                         android:layout_height="184dp"
                         android:background="@drawable/home_shape2"

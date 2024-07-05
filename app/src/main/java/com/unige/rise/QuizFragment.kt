@@ -24,9 +24,6 @@ class QuizFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        // Get instances
-        db = Firebase.firestore
-        firebaseAuth = FirebaseAuth.getInstance()
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_quiz, container, false)
