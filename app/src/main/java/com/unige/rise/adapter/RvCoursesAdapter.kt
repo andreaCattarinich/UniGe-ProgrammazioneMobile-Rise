@@ -3,6 +3,7 @@ package com.unige.rise.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import com.unige.rise.databinding.RvCourseItemBinding
 import com.unige.rise.models.Courses
 
@@ -25,9 +26,12 @@ class RvCoursesAdapter(private val courseList : java.util.ArrayList<Courses>) : 
         val currentItem = courseList[position]
         holder.apply {
             binding.apply {
-                tvNameItem.text = currentItem.name
-                tvPhoneItem.text = currentItem.phoneNumber
-                tvIdItem.text = currentItem.id
+                tvTitleItem.text = currentItem.title
+                tvDescriptionItem.text = currentItem.description
+                //tvIdItem.text = currentItem.id
+
+                Picasso.get().load(currentItem.imgUrl).into(imgItem)
+
             }
         }
     }

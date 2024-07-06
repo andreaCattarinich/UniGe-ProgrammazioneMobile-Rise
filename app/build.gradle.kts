@@ -81,4 +81,7 @@ dependencies {
     // Firebase Realtime Database
     implementation("com.google.firebase:firebase-database-ktx:21.0.0")
 
+    // Picasso
+    implementation("com.squareup.picasso:picasso:2.8")
+
 }

@@ -18,6 +18,9 @@ import com.unige.rise.adapter.RvCoursesAdapter
 import com.unige.rise.databinding.FragmentHomeBinding
 import com.unige.rise.models.Courses
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
+import com.google.firebase.firestore.firestore
 
 
 class HomeFragment : Fragment() {
@@ -43,7 +46,7 @@ class HomeFragment : Fragment() {
         val root: View = binding.root
 
         // Recycler View
-        firebaseRef = FirebaseDatabase.getInstance().getReference("contacts")
+        firebaseRef = FirebaseDatabase.getInstance().getReference("courses")
         coursesList = arrayListOf()
 
         fetchData()
@@ -53,7 +56,7 @@ class HomeFragment : Fragment() {
             layoutManager = LinearLayoutManager(this.context)
         }
 
-        /*
+
         // Set user information in the fragment
         val user = Firebase.auth.currentUser
         user?.let {
@@ -66,7 +69,7 @@ class HomeFragment : Fragment() {
         // Get instances
         db = com.google.firebase.Firebase.firestore
         firebaseAuth = FirebaseAuth.getInstance()
-        */
+
 
         return root
     }
