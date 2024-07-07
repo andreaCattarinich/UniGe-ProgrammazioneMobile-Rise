@@ -24,4 +24,9 @@
     <string name="etf_subtitle">Rise presenta la guida all’inflazione, esplorando e chiarendo...</string>
     <string name="guarda_tutte_le_guide">Guarda tutte le guide</string>
     <string name="corsi">Corsi</string>
+    <string name="titolo">Titolo</string>
+    <string name="sottotitolo">Sottotitolo</string>
+    <string name="this_is_a_description">This is a description</string>
+    <string name="course_image">Course image</string>
+    <string name="profile">Profile</string>
 </resources>

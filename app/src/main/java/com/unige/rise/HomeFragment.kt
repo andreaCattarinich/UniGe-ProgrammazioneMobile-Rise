@@ -1,5 +1,6 @@
 package com.unige.rise
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,7 +22,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
-
 
 class HomeFragment : Fragment() {
 
@@ -45,18 +45,6 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        // Recycler View
-        firebaseRef = FirebaseDatabase.getInstance().getReference("courses")
-        coursesList = arrayListOf()
-
-        fetchData()
-
-        binding.rvCourses.apply {
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(this.context)
-        }
-
-
         // Set user information in the fragment
         val user = Firebase.auth.currentUser
         user?.let {
@@ -70,6 +58,18 @@ class HomeFragment : Fragment() {
         db = com.google.firebase.Firebase.firestore
         firebaseAuth = FirebaseAuth.getInstance()
 
+
+
+        // Recycler View
+        firebaseRef = FirebaseDatabase.getInstance().getReference("courses")
+        coursesList = arrayListOf()
+
+        fetchData()
+
+        binding.rvCourses.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(this.context)
+        }
 
         return root
     }
@@ -86,6 +86,23 @@ class HomeFragment : Fragment() {
                 }
                 val rvAdapter = RvCoursesAdapter(coursesList)
                 binding.rvCourses.adapter = rvAdapter
+
+                rvAdapter.setOnItemClickListener(object : RvCoursesAdapter.onItemClickListener{
+                    override fun onItemClick(position: Int) {
+                        //Toast.makeText(requireContext(), "Clicked on $position", Toast.LENGTH_SHORT).show()
+
+                        //val test = coursesList[position]
+
+                        val intent = Intent(requireContext(), CourseActivity::class.java)
+                        intent.putExtra("id", coursesList[position].id)
+                        //intent.putExtra("title", coursesList[position].title)
+                        //intent.putExtra("description", coursesList[position].description)
+                        //intent.putExtra("imgUrl", coursesList[position].imgUrl)
+                        startActivity(intent)
+                    }
+
+                })
+
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -130,3 +147,5 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 }
+
+

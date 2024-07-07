@@ -11,13 +11,9 @@
             android:icon="@drawable/baseline_home_24"
             android:title="@string/home" />
         <item
-            android:id="@+id/nav_quiz"
+            android:id="@+id/nav_profile"
             android:icon="@drawable/baseline_quiz_24"
-            android:title="@string/quiz" />
-        <item
-            android:id="@+id/nav_test"
-            android:icon="@drawable/baseline_quiz_24"
-            android:title="@string/test" />
+            android:title="@string/profile" />
     </group>
 
     <item

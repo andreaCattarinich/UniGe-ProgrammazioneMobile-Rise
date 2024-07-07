@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
@@ -12,10 +13,10 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_quiz"
-        android:name="com.unige.rise.QuizFragment"
+        android:id="@+id/nav_profile"
+        android:name="com.unige.rise.ProfileFragment"
         android:label="Quiz"
-        tools:layout="@layout/fragment_quiz" />
+        tools:layout="@layout/fragment_profile" />
 
 
 </navigation>
