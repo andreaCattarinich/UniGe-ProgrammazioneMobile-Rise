@@ -6,8 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -25,8 +26,9 @@ import com.google.firebase.firestore.firestore
 
 class HomeFragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding!!
+    // Databinding and ViewModel
+    private lateinit var binding : FragmentHomeBinding
+    private val viewModel : HomeViewModel by viewModels()
 
     private lateinit var firebaseAuth : FirebaseAuth
     private lateinit var db : FirebaseFirestore
@@ -38,27 +40,29 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+    ): View {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = viewModel
 
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         // Set user information in the fragment
         val user = Firebase.auth.currentUser
         user?.let {
             val name = it.displayName?.split(" ")?.first()
             if (name != null) {
-                binding.homeWelcome.text = "Welcome ${name}"
+                viewModel.updateWelcomeText(name)
             }
         }
 
         // Get instances
-        db = com.google.firebase.Firebase.firestore
+        db = Firebase.firestore
         firebaseAuth = FirebaseAuth.getInstance()
-
-
 
         // Recycler View
         firebaseRef = FirebaseDatabase.getInstance().getReference("courses")
@@ -70,8 +74,6 @@ class HomeFragment : Fragment() {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(this.context)
         }
-
-        return root
     }
 
     private fun fetchData() {
@@ -110,41 +112,6 @@ class HomeFragment : Fragment() {
             }
 
         })
-    }
-
-    /*
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val linearLayout = view.findViewById<LinearLayout>(R.id.img_course1)
-
-        // Create a storage reference from my app
-        val storageReference = FirebaseStorage.getInstance().reference
-
-        // Create a reference with an initial file path and name
-        val pathReference = storageReference.child("inflazione.png")
-
-        val ONE_MEGABYTE: Long = 1024 * 1024
-        pathReference.getBytes(ONE_MEGABYTE).addOnSuccessListener { bytes ->
-
-            // Data for "images/island.jpg" is returned, use this as needed
-
-            val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-            val drawable = BitmapDrawable(resources, bitmap)
-            linearLayout.background = drawable
-        }.addOnFailureListener {
-            // Handle any errors
-            Toast.makeText(requireContext(), "Errore...", Toast.LENGTH_SHORT).show()
-
-        }
-
-
-    }
-    */
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
 

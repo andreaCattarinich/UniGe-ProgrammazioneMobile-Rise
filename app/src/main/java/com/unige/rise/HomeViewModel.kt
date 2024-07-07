@@ -5,9 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class HomeViewModel : ViewModel() {
+    // Use LiveData in ViewModel
+    private val _welcomeText = MutableLiveData<String>("Welcome, Anonymous!")
+    val welcomeText: LiveData<String> get() = _welcomeText
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+    fun updateWelcomeText(newWelcomeText : String) {
+        _welcomeText.value = "Welcome, $newWelcomeText"
     }
-    val text: LiveData<String> = _text
 }
