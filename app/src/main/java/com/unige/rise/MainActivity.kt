@@ -2,11 +2,17 @@ package com.unige.rise
 
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
-import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -14,25 +20,35 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.firebase.ui.auth.AuthUI
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.messaging.FirebaseMessaging
 import com.unige.rise.databinding.ActivityMainBinding
-import com.google.firebase.Firebase
-import com.google.firebase.auth.auth
+import com.unige.rise.databinding.NavHeaderMainBinding
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var appBarConfiguration: AppBarConfiguration
+
+    // Databinding and ViewModel
     private lateinit var binding: ActivityMainBinding
+    private val viewModel : MainViewModel by viewModels()
+
+    private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding.viewModel = viewModel
+        // Get reference to nav_header_main
+        val headerView = binding.navView.getHeaderView(0)
+        val navHeaderBinding: NavHeaderMainBinding = DataBindingUtil.bind(headerView)!!
+        navHeaderBinding.viewModel = viewModel
 
-        setSupportActionBar(binding.appBarMain.toolbar)
         // Remove title in Toolbar
+        setSupportActionBar(binding.appBarMain.toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
+        // Setup Navigation Drawer
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_main)
@@ -42,6 +58,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_home, R.id.nav_profile
             ), drawerLayout
         )
+
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
@@ -53,18 +70,9 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
+        viewModel.setupNavigationDrawerData()
 
-        // Add name, surname and email in the nav_header
-        val headerView = navView.getHeaderView(0)
-        val nameSurname = headerView.findViewById<TextView>(R.id.nav_name_surname)
-        val email = headerView.findViewById<TextView>(R.id.nav_email)
-
-        // After Authentication
-        val user = Firebase.auth.currentUser
-        user?.let {
-            nameSurname.text = it.displayName
-            email.text = it.email
-        }
+        askNotificationPermission()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -100,5 +108,64 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent(this, AuthActivity::class.java)
                 startActivity(intent)
             }
+    }
+
+    // FCM
+    private fun askNotificationPermission() {
+        // This is only necessary for API level >= 33 (TIRAMISU)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) ==
+                PackageManager.PERMISSION_GRANTED
+            ) {
+                // FCM SDK (and your app) can post notifications.
+            } else if (shouldShowRequestPermissionRationale(android.Manifest.permission.POST_NOTIFICATIONS)) {
+                // TODO: remove comments
+                // TODO: display an educational UI explaining to the user the features that will be enabled
+                //       by them granting the POST_NOTIFICATION permission. This UI should provide the user
+                //       "OK" and "No thanks" buttons. If the user selects "OK," directly request the permission.
+                //       If the user selects "No thanks," allow the user to continue without notifications.
+            } else {
+                // Directly ask for the permission
+                requestPermissionLauncher.launch(android.Manifest.permission.POST_NOTIFICATIONS)
+            }
+        } else {
+            FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    Log.w("FirebaseLogs", "Fetching FCM registration token failed", task.exception)
+                    return@OnCompleteListener
+                }
+
+                // Get new FCM registration token
+                val token = task.result
+                Log.w("FirebaseLogs", "Fetching FCM registration token: $token")
+
+            })
+        }
+    }
+
+    // Declare the launcher at the top of your Activity/Fragment:
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission(),
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+            FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    Log.w("FirebaseLogs", "Fetching FCM registration token failed", task.exception)
+                    return@OnCompleteListener
+                }
+
+                // Get new FCM registration token
+                val token = task.result
+
+                // Log and toast
+                /*
+                val msg = getString(R.string.msg_token_fmt, token)
+                Log.d(TAG, msg)
+                Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+                 */
+            })
+        } else {
+            // TODO: Inform user that that your app will not show notifications.
+        }
     }
 }

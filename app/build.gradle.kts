@@ -89,4 +89,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
     implementation("androidx.activity:activity-ktx:1.8.2")
 
+    // Firebase Cloud Messagin (FCM)
+    //implementation("com.google.firebase:firebase-messaging")
+    implementation("com.google.firebase:firebase-messaging:24.0.0")
 }
