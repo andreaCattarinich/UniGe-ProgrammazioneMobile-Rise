@@ -23,8 +23,8 @@
 
             <ImageButton
                 android:id="@+id/icon_rise"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:scaleType="fitXY"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/logo_rise"
@@ -35,9 +35,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/app_name"
+                android:fontFamily="@font/poppinsbold"
                 android:textColor="@android:color/white"
                 android:textSize="40sp"
-                android:textStyle="bold|italic" />
+                android:textStyle="bold" />
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>

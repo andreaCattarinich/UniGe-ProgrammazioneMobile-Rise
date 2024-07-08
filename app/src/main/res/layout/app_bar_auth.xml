@@ -38,9 +38,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/app_name"
+            android:fontFamily="@font/poppinsbold"
             android:textColor="@android:color/white"
             android:textSize="40sp"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold" />
     </androidx.appcompat.widget.Toolbar>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

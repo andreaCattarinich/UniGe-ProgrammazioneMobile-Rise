@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/navigation_header"
-            android:paddingTop="8dp"
+            android:layout_marginTop="8dp"
             app:srcCompat="@drawable/ic_rise" />
 
         <TextView
@@ -32,8 +32,8 @@
             android:layout_height="wrap_content"
             android:paddingTop="8dp"
             android:text="@{viewModel.username}"
+            android:fontFamily="@font/poppinsbold"
             android:textColor="@color/white"
-            android:textStyle="bold"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
         <TextView
@@ -43,9 +43,11 @@
             android:paddingTop="8dp"
             android:layout_marginBottom="20dp"
             android:text="@{viewModel.email}"
+            android:fontFamily="@font/poppinsregular"
+            android:textSize="11sp"
             android:textColor="@color/white"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
-
     </LinearLayout>
+
 </layout>

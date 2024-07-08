@@ -17,6 +17,7 @@ class CourseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_course)
 
+        // TODO: aggiungere il dataBinding e ViewModel
         val titleTextView = findViewById<TextView>(R.id.title)
         val subtitleTextView = findViewById<TextView>(R.id.subtitle)
         val descriptionTextView = findViewById<TextView>(R.id.description)
