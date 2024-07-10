@@ -46,6 +46,13 @@ class CourseActivity : AppCompatActivity() {
             }.addOnFailureListener {
                 Toast.makeText(this, "Something goes wrong", Toast.LENGTH_SHORT).show()
             }
+
+            binding.quiz.setOnClickListener {
+                val intent = Intent(this, QuizActivity::class.java)
+                intent.putExtra("courseId", id)
+                startActivity(intent)
+            }
+
         } else {
             //viewModel.updateTitleText("You're not logged in!")
             val intent = Intent(this, AuthActivity::class.java)

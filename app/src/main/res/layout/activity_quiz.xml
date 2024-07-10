@@ -1,0 +1,42 @@
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.unige.rise.QuizViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.currentQuestion}" />
+
+        <Button
+            android:id="@+id/trueBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="True"/>
+
+        <Button
+            android:id="@+id/falseBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="False"/>
+
+        <Button
+            android:id="@+id/submitButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Submit" />
+
+    </LinearLayout>
+</layout>
