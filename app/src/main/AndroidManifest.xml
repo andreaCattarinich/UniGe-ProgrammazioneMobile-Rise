@@ -33,7 +33,14 @@
             android:theme="@style/Theme.MainActivity">
 
         </activity>
-
+        <service
+            android:name=".RiseFirebaseMessagingService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_rise" />
