@@ -12,7 +12,7 @@
             android:title="@string/home" />
         <item
             android:id="@+id/nav_profile"
-            android:icon="@drawable/baseline_quiz_24"
+            android:icon="@drawable/baseline_face_24"
             android:title="@string/profile" />
     </group>
 

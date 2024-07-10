@@ -89,7 +89,7 @@ class HomeFragment : Fragment() {
                 val rvAdapter = RvCoursesAdapter(coursesList)
                 binding.rvCourses.adapter = rvAdapter
 
-                rvAdapter.setOnItemClickListener(object : RvCoursesAdapter.onItemClickListener{
+                rvAdapter.setOnItemClickListener(object : RvCoursesAdapter.OnItemClickListener{
                     override fun onItemClick(position: Int) {
                         //Toast.makeText(requireContext(), "Clicked on $position", Toast.LENGTH_SHORT).show()
 
@@ -97,9 +97,6 @@ class HomeFragment : Fragment() {
 
                         val intent = Intent(requireContext(), CourseActivity::class.java)
                         intent.putExtra("id", coursesList[position].id)
-                        //intent.putExtra("title", coursesList[position].title)
-                        //intent.putExtra("description", coursesList[position].description)
-                        //intent.putExtra("imgUrl", coursesList[position].imgUrl)
                         startActivity(intent)
                     }
 

@@ -40,6 +40,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btnLoginEmail" />
 
+        <!--
         <Button
             android:id="@+id/btnLoginAnonymous"
             android:layout_width="wrap_content"
@@ -52,5 +53,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btnLoginGoogle" />
+            -->
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

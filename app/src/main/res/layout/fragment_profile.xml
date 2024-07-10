@@ -8,6 +8,7 @@
     android:background="@drawable/background"
     tools:context=".MainActivity">
 
+    <!-- TODO: mettere apposto le stringhe -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -96,7 +97,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="30dp"
                         android:textColor="@color/black"
-                        android:text="This is my bio"
+                        android:text="@string/description"
                         android:fontFamily="@font/poppinsregular"
                         android:textSize="15sp"
                         android:layout_alignParentStart="true" />

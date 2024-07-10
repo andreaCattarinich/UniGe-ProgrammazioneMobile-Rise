@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity() {
             R.id.action_settings -> {
                 Toast.makeText(this, item.title, Toast.LENGTH_SHORT).show()
                 true
-            }   // Se l'item selezionato è uno della navigationDrawer gestiscilo con la classe padre
+            }   // Se l'item selezionato appartiene alla navigationDrawer gestiscilo con la classe padre
             else -> super.onOptionsItemSelected(item)
         }
     }

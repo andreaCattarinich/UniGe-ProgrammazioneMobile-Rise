@@ -7,24 +7,19 @@ import com.squareup.picasso.Picasso
 import com.unige.rise.databinding.RvCourseItemBinding
 import com.unige.rise.models.Courses
 
-
-// TODO:
-//class RvCoursesAdapter(private val courseList : ArrayList<Courses>) : RecyclerView.Adapter<RvCoursesAdapter.ViewHolder>() {
 class RvCoursesAdapter(private val courseList : java.util.ArrayList<Courses>) : RecyclerView.Adapter<RvCoursesAdapter.ViewHolder>() {
-
     // for OnClick RecyclerView items
-    private lateinit var mListener: onItemClickListener
+    private lateinit var mListener: OnItemClickListener
 
-    interface onItemClickListener {
-
+    interface OnItemClickListener {
         fun onItemClick(position : Int)
     }
 
-    fun setOnItemClickListener(listener : onItemClickListener) {
+    fun setOnItemClickListener(listener : OnItemClickListener) {
         mListener = listener
     }
 
-    class ViewHolder(val binding : RvCourseItemBinding, listener: onItemClickListener) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(val binding : RvCourseItemBinding, listener: OnItemClickListener) : RecyclerView.ViewHolder(binding.root) {
         init {
             itemView.setOnClickListener {
                 listener.onItemClick(adapterPosition)
@@ -33,7 +28,6 @@ class RvCoursesAdapter(private val courseList : java.util.ArrayList<Courses>) : 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-
         return ViewHolder(RvCourseItemBinding.inflate(LayoutInflater.from(parent.context),parent,false), mListener)
     }
 
@@ -47,19 +41,8 @@ class RvCoursesAdapter(private val courseList : java.util.ArrayList<Courses>) : 
             binding.apply {
                 tvTitleItem.text = currentItem.title
                 tvSubtitleItem.text = currentItem.subtitle
-                //tvIdItem.text = currentItem.id
 
                 Picasso.get().load(currentItem.imgUrl).into(imgItem)
-
-                /* Come cambiare activity dopo aver cliccato sopra un item
-                holder.itemView.setOnClickListener(object : View.OnClickListener{
-                    override fun onClick(v: View?) {
-                        //val activity = v!!.context as AppCompatActivity
-                        //activity.supportFragmentManager.beginTransaction().replace(R.id.fragment_home, QuizFragment()).addToBackStack(null).commit()
-
-                    }
-                })
-                */
             }
         }
     }
