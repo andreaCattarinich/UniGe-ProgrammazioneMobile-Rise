@@ -16,6 +16,7 @@ class QuizActivity : AppCompatActivity() {
     private val viewModel: QuizViewModel by viewModels()
 
     private var db: DatabaseReference = FirebaseDatabase.getInstance().reference
+    private var courseId : String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,22 +25,83 @@ class QuizActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        val courseId : String = intent.extras?.getString("courseId") ?: "0"
+        courseId = intent.extras?.getString("courseId") ?: "0"
 
-        db.child("courses").child(courseId).child("quiz").get().addOnSuccessListener { dataSnapshot ->
-            viewModel.initQuiz(courseId, dataSnapshot.childrenCount.toInt())
-        }.addOnFailureListener {
-            Toast.makeText(this, "Something goes wrong", Toast.LENGTH_SHORT).show()
-        }
+        db.child("courses")
+            .child(courseId)
+            .get()
+            .addOnSuccessListener { dataSnapshot ->
 
-        //viewModel.initQuiz(courseId, )
+                viewModel.updateCourseId(courseId)
+                viewModel.updateQuestionSize(dataSnapshot.child("quiz").childrenCount.toInt())
+
+                //Toast.makeText(this, viewModel.arrayQuestionSize.value.toString(), Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this, viewModel.currentQuestionIndex.value.toString(), Toast.LENGTH_SHORT).show()
+                var question = dataSnapshot
+                    .child("quiz")
+                    .child("1")
+                    .child("question")
+                    .getValue(String::class.java)
+                viewModel.loadCurrentQuestion(question.toString())
+            }
 
         binding.trueBtn.setOnClickListener {
-            viewModel.answer(true)
+            var nextQuestion = viewModel.answer(true)
+            if(nextQuestion != -1 && nextQuestion!! <= 2) {
+                loadNextQuestion(nextQuestion!!)
+            } else {
+                getQuizResult()
+            }
         }
 
         binding.falseBtn.setOnClickListener {
-            viewModel.answer(false)
+            var nextQuestion = viewModel.answer(false)
+            if(nextQuestion != -1 && nextQuestion!! <= 2) {
+                loadNextQuestion(nextQuestion!!)
+            } else {
+                getQuizResult()
+            }
         }
+
+    }
+
+    private fun loadNextQuestion(nextQuestionIndex : Int) {
+        db.child("courses")
+            .child(courseId)
+            .get()
+            .addOnSuccessListener { dataSnapshot ->
+
+                //Toast.makeText(this, viewModel.currentQuestionIndex.value.toString(), Toast.LENGTH_SHORT).show()
+                var question = dataSnapshot
+                    .child("quiz")
+                    .child(nextQuestionIndex.toString())
+                    .child("question")
+                    .getValue(String::class.java)
+
+                viewModel.loadCurrentQuestion(question.toString())
+            }
+    }
+
+    private fun getQuizResult() {
+        var count = 0
+        db.child("courses")
+            .child(courseId)
+            .get()
+            .addOnSuccessListener { dataSnapshot ->
+                for (i in 1 until 3) {
+
+                    var correct_answer = dataSnapshot
+                        .child("quiz")
+                        .child(i.toString())
+                        .child("response")
+                        .getValue(Boolean::class.java)
+
+                    var user_answer = viewModel.getUserAnswer(i)
+                    if (user_answer == correct_answer) {
+                        count++
+                    }
+                }
+                Toast.makeText(this, "Correct: $count", Toast.LENGTH_SHORT).show()
+            }
     }
 }
