@@ -3,6 +3,10 @@ package com.unige.rise.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.firestore
 import com.squareup.picasso.Picasso
 import com.unige.rise.databinding.RvCourseItemBinding
 import com.unige.rise.models.Courses
@@ -41,8 +45,26 @@ class RvCoursesAdapter(private val courseList : java.util.ArrayList<Courses>) : 
             binding.apply {
                 tvTitleItem.text = currentItem.title
                 tvSubtitleItem.text = currentItem.subtitle
+                //tvCourseCompletion.text =
+                val db : FirebaseFirestore = Firebase.firestore
+                val user = Firebase.auth.currentUser
+                if (user != null) {
+                    db.collection(user.uid)
+                        .document("course${position+1}")
+                        .get()
+                        .addOnSuccessListener { data ->
+                            val courseCompletion = data.get("score").toString().toInt()
 
-                Picasso.get().load(currentItem.imgUrl).into(imgItem)
+                            when (courseCompletion) {
+                                in 0..30 -> tvCourseCompletion.setTextColor(android.graphics.Color.RED)
+                                in 31..70 -> tvCourseCompletion.setTextColor(android.graphics.Color.YELLOW)
+                                else -> tvCourseCompletion.setTextColor(android.graphics.Color.GREEN)
+                            }
+                            tvCourseCompletion.text = "${courseCompletion}%"
+
+                            Picasso.get().load(currentItem.imgUrl).into(imgItem)
+                        }
+                }
             }
         }
     }

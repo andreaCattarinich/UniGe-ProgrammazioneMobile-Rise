@@ -60,7 +60,14 @@ class ProfileFragment : Fragment() {
                     realtimeDB = FirebaseDatabase.getInstance().reference
                     realtimeDB.child("courses").get().addOnSuccessListener { data ->
                         Log.d("RiseLOG", "N. corsi(2) = > ${data.childrenCount}")
-                        viewModel.updateCourseCompletion((totalScore/data.childrenCount).toInt())
+                        val completion = (totalScore/data.childrenCount).toInt()
+                        viewModel.updateCourseCompletion(completion)
+
+                        when (completion) {
+                            in 0..30 -> binding.courseCompletion.setTextColor(android.graphics.Color.RED)
+                            in 31..70 -> binding.courseCompletion.setTextColor(android.graphics.Color.YELLOW)
+                            else -> binding.courseCompletion.setTextColor(android.graphics.Color.GREEN)
+                        }
                     }
                 }
                 .addOnFailureListener { exception ->
