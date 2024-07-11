@@ -12,31 +12,67 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:gravity="center"
+        android:padding="16dp"
+        android:background="@drawable/background">
+
+        <TextView
+            android:id="@+id/num_current_question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.currentQuestionFraction}"
+            android:fontFamily="@font/poppinsregular"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            tools:text="1/5" />
 
         <TextView
             android:id="@+id/question"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{viewModel.currentQuestion}" />
+            android:text="@{viewModel.currentQuestion}"
+            android:fontFamily="@font/poppinsmedium"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            tools:text="Un conto deposito offre generalmente un tasso di interesse più alto rispetto a un conto corrente"/>
 
-        <Button
-            android:id="@+id/trueBtn"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="True"/>
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/trueBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="True"
+                android:layout_margin="8dp"
+                android:backgroundTint="#4CAF50" />
+
+            <Button
+                android:id="@+id/falseBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="False"
+                android:layout_margin="8dp"
+                android:backgroundTint="#F44336" />
+
+        </LinearLayout>
 
         <Button
-            android:id="@+id/falseBtn"
-            android:layout_width="match_parent"
+            android:id="@+id/homeBtn"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="False"/>
-
-        <Button
-            android:id="@+id/submitButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Submit" />
+            android:text="Go to Home"
+            android:layout_margin="8dp"
+            android:backgroundTint="#4CAF50"
+            android:visibility="gone"/>
 
     </LinearLayout>
+
 </layout>

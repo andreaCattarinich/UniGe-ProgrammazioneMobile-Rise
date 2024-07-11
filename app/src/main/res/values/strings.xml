@@ -23,4 +23,7 @@
     <string name="user_information">User Information</string>
     <string name="email">Email</string>
     <string name="name">Name</string>
+    <string name="btn_true">True</string>
+    <string name="btn_false">False</string>
+    <string name="go_to_home">Go to Home</string>
 </resources>
