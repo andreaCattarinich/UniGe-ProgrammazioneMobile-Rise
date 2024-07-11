@@ -20,4 +20,7 @@
 
     <string name="course_image">Course image</string>
     <string name="profile">Profile</string>
+    <string name="user_information">User Information</string>
+    <string name="email">Email</string>
+    <string name="name">Name</string>
 </resources>

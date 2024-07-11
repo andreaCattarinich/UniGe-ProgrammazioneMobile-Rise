@@ -5,52 +5,38 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
+import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.unige.rise.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
 
-    private lateinit var firebaseAuth : FirebaseAuth
-    private lateinit var db : FirebaseFirestore
+    private lateinit var binding : FragmentProfileBinding
+    private val viewModel : ProfileViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = viewModel
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        /*
-        val imageView = view.findViewById<ImageView>(R.id.firstCourse)
-
-        // Create a storage reference from my app
-        val storageReference = FirebaseStorage.getInstance().reference
-
-        // Create a reference with an initial file path and name
-        val pathReference = storageReference.child("inflazione.png")
-
-        val ONE_MEGABYTE: Long = 1024 * 1024
-        pathReference.getBytes(ONE_MEGABYTE).addOnSuccessListener { bytes ->
-
-            // Data for "images/island.jpg" is returned, use this as needed
-
-            val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-            imageView.setImageBitmap(bitmap)
-
-            Toast.makeText(requireContext(), "Immagine ok...", Toast.LENGTH_SHORT).show()
-
-        }.addOnFailureListener {
-            // Handle any errors
-            Toast.makeText(requireContext(), "Errore...", Toast.LENGTH_SHORT).show()
-
+        val user = Firebase.auth.currentUser
+        if (user != null) {
+            viewModel.updateDisplayName(user.displayName.toString())
+            viewModel.updateEmail(user.email.toString())
         }
-        */
-
     }
-
 
 }
