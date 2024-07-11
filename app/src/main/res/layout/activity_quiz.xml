@@ -1,6 +1,5 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -9,88 +8,35 @@
             type="com.unige.rise.QuizViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background">
+        android:orientation="vertical"
+        android:padding="16dp">
 
-        <LinearLayout
-            android:layout_width="0dp"
+        <TextView
+            android:id="@+id/question"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5">
-
-            <TextView
-                android:id="@+id/num_current_question"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppinsregular"
-                android:text="@{viewModel.currentQuestionFraction}"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                tools:text="1/5" />
-
-            <TextView
-                android:id="@+id/question"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppinsmedium"
-                android:text="@{viewModel.currentQuestion}"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                tools:text="I fondi depositati in un conto deposito non possono essere ritirati prima della scadenza senza penali" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/trueBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:backgroundTint="#1b8a24"
-                    android:fontFamily="@font/poppinsbold"
-                    android:text="@string/btn_true"
-                    tools:ignore="ButtonStyle" />
-
-                <Button
-                    android:id="@+id/falseBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:backgroundTint="#ff5555"
-                    android:fontFamily="@font/poppinsbold"
-                    android:text="@string/btn_false"
-                    tools:ignore="ButtonStyle" />
-            </LinearLayout>
-        </LinearLayout>
+            android:text="@{viewModel.currentQuestion}" />
 
         <Button
-            android:id="@+id/homeBtn"
-            android:layout_width="wrap_content"
+            android:id="@+id/trueBtn"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:backgroundTint="#1b8a24"
-            android:fontFamily="@font/poppinsbold"
-            android:text="@string/go_to_home"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.502"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.827" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:text="True"/>
+
+        <Button
+            android:id="@+id/falseBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="False"/>
+
+        <Button
+            android:id="@+id/submitButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Submit" />
+
+    </LinearLayout>
 </layout>
