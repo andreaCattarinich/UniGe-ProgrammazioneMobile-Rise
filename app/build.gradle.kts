@@ -70,6 +70,8 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore")
 
     // Firebase authentication
+    implementation("com.google.firebase:firebase-auth")
+
     implementation("com.firebaseui:firebase-ui-auth:8.0.2")
 
     // if you target Android 12

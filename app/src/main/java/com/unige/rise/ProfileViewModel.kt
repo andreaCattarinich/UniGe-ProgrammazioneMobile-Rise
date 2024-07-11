@@ -9,12 +9,12 @@ class ProfileViewModel : ViewModel() {
     private val _displayName = MutableLiveData("Name")
     private val _email = MutableLiveData("rise@project.com")
     private val _phoneNumber = MutableLiveData("+33 1234567890")
-    private val _courseCompletion = MutableLiveData(75)
+    private val _courseCompletion = MutableLiveData("75%")
 
     val displayName: LiveData<String> get() = _displayName
     val email: LiveData<String> get() = _email
     val phoneNumber: LiveData<String> get() = _phoneNumber
-    val courseCompletion: LiveData<Int> get() = _courseCompletion
+    val courseCompletion: LiveData<String> get() = _courseCompletion
 
     fun updateDisplayName(newName : String) {
         _displayName.value = newName
@@ -29,6 +29,6 @@ class ProfileViewModel : ViewModel() {
     }
 
     fun updateCourseCompletion(newCourseCompletion : Int) {
-        _courseCompletion.value = newCourseCompletion
+        _courseCompletion.value = "$newCourseCompletion%"
     }
 }

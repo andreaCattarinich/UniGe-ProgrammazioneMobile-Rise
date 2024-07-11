@@ -59,8 +59,8 @@ class AuthActivity : AppCompatActivity() {
             intent.putExtra("USER", user)
             startActivity(intent)
         } else {
-            finish()
             startActivity(intent)
+            finish()
         }
     }
 }
