@@ -7,10 +7,10 @@ import androidx.lifecycle.ViewModel
 class QuizViewModel : ViewModel() {
 
     private val _courseId = MutableLiveData<String>()
-    private val _currentQuestionIndex = MutableLiveData<Int>(1)
-    private val _currentQuestionFraction = MutableLiveData<String>("1/5")
+    private val _currentQuestionIndex = MutableLiveData(1)
+    private val _currentQuestionFraction = MutableLiveData("1/5")
     private val _currentQuestion = MutableLiveData("Question")
-    private val _arrayQuestionSize = MutableLiveData<Int>(0)
+    private val _arrayQuestionSize = MutableLiveData(0)
     private val _arrayAnswers = MutableLiveData<List<Boolean>>()
 
     val courseId: LiveData<String> get() = _courseId
