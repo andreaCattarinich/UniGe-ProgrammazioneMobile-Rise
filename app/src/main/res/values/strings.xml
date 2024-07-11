@@ -27,4 +27,5 @@
     <string name="btn_false">False</string>
     <string name="go_to_home">Go to Home</string>
     <string name="course_completion">Course completion</string>
+    <string name="completion">Completion</string>
 </resources>
