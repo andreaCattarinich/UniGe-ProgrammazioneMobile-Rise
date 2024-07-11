@@ -103,7 +103,7 @@ class QuizActivity : AppCompatActivity() {
             .child(courseId)
             .get()
             .addOnSuccessListener { dataSnapshot ->
-                for (i in 1 until 3) {
+                for (i in 1 until (viewModel.getArrayQuestionSize() + 1)){
 
                     val correctAnswer = dataSnapshot
                         .child("quiz")

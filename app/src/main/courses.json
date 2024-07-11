@@ -58,6 +58,11 @@
           "id": "2",
           "question": "I piani di accumulo non consentono di ridurre il rischio di mercato",
           "response": false
+        },
+        {
+          "id": "3",
+          "question": "Questa risposta è vera o falsa? (Risposta corretta: vera)",
+          "response": true
         }
       ]
     }
