@@ -11,6 +11,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.unige.rise.databinding.ActivityAuthBinding
 
 class AuthActivity : AppCompatActivity() {
+    // Finalmente ho fatto il merge
     private lateinit var binding : ActivityAuthBinding
 
     private val signInLauncher = registerForActivityResult(
