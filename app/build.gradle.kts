@@ -7,6 +7,9 @@ plugins {
 
     // Safe Args
     id("androidx.navigation.safeargs.kotlin")
+
+    // Databinding
+    id("kotlin-kapt")
 }
 
 android {
@@ -41,6 +44,7 @@ android {
     }
 
     buildFeatures {
+        viewBinding = true
         dataBinding = true
     }
 }
@@ -55,6 +59,7 @@ dependencies {
     // Navigation
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
+    implementation("androidx.activity:activity:1.8.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.2.0")
@@ -65,8 +70,28 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore")
 
     // Firebase authentication
+    implementation("com.google.firebase:firebase-auth")
+
     implementation("com.firebaseui:firebase-ui-auth:8.0.2")
 
     // if you target Android 12
     //implementation("com.google.android.gms:play-services-auth:21.2.0")
+
+    // Firebase Cloud Storage
+    //implementation("com.google.firebase:firebase-storage")
+    implementation("com.google.firebase:firebase-storage:21.0.0")
+
+    // Firebase Realtime Database
+    implementation("com.google.firebase:firebase-database-ktx:21.0.0")
+
+    // Picasso
+    implementation("com.squareup.picasso:picasso:2.8")
+
+    // Lifecycle
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+    implementation("androidx.activity:activity-ktx:1.8.2")
+
+    // Firebase Cloud Messagin (FCM)
+    //implementation("com.google.firebase:firebase-messaging")
+    implementation("com.google.firebase:firebase-messaging:24.0.0")
 }

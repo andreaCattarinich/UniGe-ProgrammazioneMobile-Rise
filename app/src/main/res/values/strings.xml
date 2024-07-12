@@ -8,7 +8,24 @@
     <!-- Navigation Drawer -->
     <string name="open_nav">Open Navigation Drawer</string>
     <string name="close_nav">Close Navigation Drawer</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="welcome_anonymous">Welcome Anonymous</string>
+    <string name="home">Home</string>
+    <string name="quiz">Quiz</string>
+    <string name="logout">Logout</string>
+    <string name="action_settings">Settings</string>
+    <string name="navigation_header">Navigation header</string>
+
+    <string name="title">Title</string>
+    <string name="subtitle">Subtitle</string>
+    <string name="description">This is a description</string>
+
+    <string name="course_image">Course image</string>
+    <string name="profile">Profile</string>
+    <string name="user_information">User Information</string>
+    <string name="email">Email</string>
+    <string name="name">Name</string>
+    <string name="btn_true">True</string>
+    <string name="btn_false">False</string>
+    <string name="go_to_home">Go to Home</string>
+    <string name="course_completion">Course completion</string>
+    <string name="completion">Completion</string>
 </resources>

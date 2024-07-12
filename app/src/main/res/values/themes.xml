@@ -7,7 +7,10 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.Rise" parent="Base.Theme.Rise" />
+    <style name="Theme.Rise" parent="Base.Theme.Rise">
+        <!-- Status bar color -->
+        <item name="android:statusBarColor">@color/black</item>
+    </style>
 
 
     <!-- Navigation Drawer -->
@@ -23,8 +26,7 @@
         <item name="colorSecondaryVariant">@color/teal_200</item>
         <item name="colorOnSecondary">@color/black</item>
 
-        <!-- Status bar color -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">@color/black</item>
     </style>
 
     <!-- Home page Scroll -->
