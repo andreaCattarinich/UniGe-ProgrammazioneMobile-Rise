@@ -66,13 +66,13 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.0")
 
     // Firebase
-    implementation(platform("com.google.firebase:firebase-bom:33.1.2"))
+    //implementation(platform("com.google.firebase:firebase-bom:33.1.2"))
     implementation("com.google.firebase:firebase-firestore")
 
     // Firebase authentication
     //implementation("com.google.firebase:firebase-auth")
-    implementation("com.google.firebase:firebase-auth:23.0.0")
-    implementation("com.firebaseui:firebase-ui-auth:8.0.2")
+    //implementation("com.google.firebase:firebase-auth:23.0.0")
+    //implementation("com.firebaseui:firebase-ui-auth:8.0.2")
 
     // if you target Android 12
     //implementation("com.google.android.gms:play-services-auth:21.2.0")
@@ -91,7 +91,19 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
     implementation("androidx.activity:activity-ktx:1.8.2")
 
-    // Firebase Cloud Messagin (FCM)
+    // Firebase Cloud Messaging (FCM)
     //implementation("com.google.firebase:firebase-messaging")
     implementation("com.google.firebase:firebase-messaging:24.0.0")
+
+
+    /*** Firebase Authentication Android Google ***/
+    // Import the BoM for the Firebase platform
+    implementation(platform("com.google.firebase:firebase-bom:33.1.2"))
+    // Add the dependency for the Firebase Authentication library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation("com.google.firebase:firebase-auth")
+    // Also add the dependency for the Google Play services library and specify its version
+    implementation("com.google.android.gms:play-services-auth:21.2.0")
+
+
 }

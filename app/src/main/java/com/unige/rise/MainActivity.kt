@@ -20,9 +20,13 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.firebase.ui.auth.AuthUI
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+//import com.firebase.ui.auth.AuthUI
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.messaging.FirebaseMessaging
 import com.unige.rise.databinding.ActivityMainBinding
 import com.unige.rise.databinding.NavHeaderMainBinding
@@ -35,11 +39,17 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
+    private lateinit var mGoogleSignInClient: GoogleSignInClient
+    private lateinit var mAuth: FirebaseAuth
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.viewModel = viewModel
+
         // Get reference to nav_header_main
         val headerView = binding.navView.getHeaderView(0)
         val navHeaderBinding: NavHeaderMainBinding = DataBindingUtil.bind(headerView)!!
@@ -72,6 +82,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         viewModel.setupNavigationDrawerData()
+
+
+        mAuth = FirebaseAuth.getInstance()
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+
 
         // FCM
         //Require the permission POST_NOTIFICATIONS
@@ -125,6 +145,7 @@ class MainActivity : AppCompatActivity() {
 
         // Logout
         builder.setPositiveButton("Logout") { dialog: DialogInterface, i: Int -> signOut() }
+        //builder.setPositiveButton("Logout") { dialog: DialogInterface, i: Int -> dialog.dismiss() }
 
         // Do nothing
         builder.setNegativeButton("Cancel") { dialog: DialogInterface, i: Int -> dialog.dismiss() }
@@ -133,6 +154,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun signOut() {
+        mAuth.signOut()
+
+        mGoogleSignInClient.signOut().addOnCompleteListener(this) {
+            // Optional: Update UI or show a message to the user
+            val intent = Intent(this, AuthActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+        /*
         AuthUI.getInstance()
             .signOut(this)
             .addOnCompleteListener {
@@ -141,5 +171,6 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
                 finish()
             }
+        */
     }
 }

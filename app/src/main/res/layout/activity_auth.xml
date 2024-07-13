@@ -17,10 +17,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/loginEmail"
-            android:fontFamily="@font/poppinsmedium"
-            android:textColor="@color/black"
             android:backgroundTint="@color/white"
+            android:fontFamily="@font/poppinsmedium"
+            android:text="@string/loginEmail"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -32,10 +32,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/loginGoogle"
-            android:fontFamily="@font/poppinsmedium"
-            android:textColor="@color/black"
             android:backgroundTint="@color/white"
+            android:fontFamily="@font/poppinsmedium"
+            android:text="@string/loginGoogle"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btnLoginEmail" />
@@ -53,6 +53,21 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btnLoginGoogle" />
+
+
+        <Button
+            android:id="@+id/googleBtn"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:backgroundTint="@color/white"
+            android:text="Sign up with Google"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.689" />
             -->
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

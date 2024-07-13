@@ -3,68 +3,81 @@ package com.unige.rise
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import com.firebase.ui.auth.AuthUI
-import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
-import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 import com.unige.rise.databinding.ActivityAuthBinding
 
 class AuthActivity : AppCompatActivity() {
-    // Finalmente ho fatto il merge
     private lateinit var binding : ActivityAuthBinding
 
-    // Create an ActivityResultLauncher which registers a callback
-    // for the FirebaseUI Activity result contract
-    private val signInLauncher = registerForActivityResult(
-        FirebaseAuthUIActivityResultContract(),
-    ) { res ->
-        this.onSignInResult(res)
+    companion object {
+        private const val RC_SIGN_IN = 9001
     }
+
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //setContentView(R.layout.activity_auth)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_auth)
 
-        binding.apply {
-            btnLoginEmail.setOnClickListener { signInWith("email") }
-            btnLoginGoogle.setOnClickListener { signInWith("google") }
-            // btnLoginAnonymous.setOnClickListener { signInWith("anonymous") }
+        auth = FirebaseAuth.getInstance()
+
+        val currentUser = auth.currentUser
+
+        if (currentUser != null) {
+            // The user is already signed in, navigate to MainActivity
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish() // finish the current activity to prevent the user from coming back to the SignInActivity using the back button
         }
+
+        binding.btnLoginGoogle.setOnClickListener{ signIn() }
     }
 
-    private fun signInWith(signInMethod : String) {
-        val providers = when (signInMethod) {
-            "email" -> arrayListOf(AuthUI.IdpConfig.EmailBuilder().build())
-            "google" -> arrayListOf(AuthUI.IdpConfig.GoogleBuilder().build())
-            //"anonymous" -> arrayListOf(AuthUI.IdpConfig.AnonymousBuilder().build())
-            else -> throw IllegalArgumentException("Illegal sign-in method: ($signInMethod)")
-        }
-        startFirebaseUIAuth(providers)
-    }
-
-    private fun startFirebaseUIAuth(providers: List<AuthUI.IdpConfig>) {
-        val signInIntent = AuthUI.getInstance()
-            .createSignInIntentBuilder()
-            .setAvailableProviders(providers)
+    private fun signIn() {
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
             .build()
 
-        signInLauncher.launch(signInIntent)
+        val googleSignInClient = GoogleSignIn.getClient(this, gso)
+        val signInIntent = googleSignInClient.signInIntent
+        startActivityForResult(signInIntent, RC_SIGN_IN)
     }
 
-    private fun onSignInResult(result: FirebaseAuthUIAuthenticationResult) {
-        val response = result.idpResponse
-        if (result.resultCode == RESULT_OK) {
-            // Successfully signed in
-            val user = FirebaseAuth.getInstance().currentUser
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
 
-            // Start the MainActivity
-            val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("USER", user)
-            startActivity(intent)
-        } else {
-            startActivity(intent)
-            finish()
+        if (requestCode == RC_SIGN_IN) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                val account = task.getResult(ApiException::class.java)
+                firebaseAuthWithGoogle(account.idToken!!)
+            } catch (e: ApiException) {
+                Toast.makeText(this, "Google sign in failed: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
         }
     }
+
+    private fun firebaseAuthWithGoogle(idToken: String) {
+        val credential = GoogleAuthProvider.getCredential(idToken, null)
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    val user = auth.currentUser
+                    Toast.makeText(this, "Signed in as ${user?.displayName}", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this, MainActivity::class.java))
+                    finish()
+                } else {
+                    Toast.makeText(this, "Authentication failed", Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
 }
+

@@ -21,6 +21,9 @@ import com.unige.rise.adapter.RvCoursesAdapter
 import com.unige.rise.databinding.FragmentHomeBinding
 import com.unige.rise.models.Courses
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
@@ -38,6 +41,11 @@ class HomeFragment : Fragment() {
     private lateinit var coursesList : ArrayList<Courses>
     private lateinit var firebaseRef : DatabaseReference
 
+
+
+    private lateinit var mGoogleSignInClient: GoogleSignInClient
+    private lateinit var mAuth: FirebaseAuth
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,6 +54,32 @@ class HomeFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
+        /***** start GOOGLE SIGN-IN *****/
+        mAuth = FirebaseAuth.getInstance()
+
+
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+
+        //mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+        mGoogleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
+
+        val auth = Firebase.auth
+        val user = auth.currentUser
+
+        if (user != null) {
+            val userName = user.displayName.toString()
+            viewModel.updateWelcomeText(userName)
+        } else {
+            // Handle the case where the user is not signed in
+        }
+
+        /***** end GOOGLE SIGN-IN  *****/
+
+
+
         return binding.root
     }
 
@@ -53,19 +87,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val user = Firebase.auth.currentUser
-        if (user != null) {
-            Log.d("FirebaseUser", "User is authenticated")
-            val name = user.displayName
-            if (name != null) {
-                val firstName = name.split(" ").first()
-                Log.d("FirebaseUser", "User's first name: $firstName")
-                viewModel.updateWelcomeText(firstName)
-            } else {
-                Log.d("FirebaseUser", "Display name is null")
-            }
-        } else {
-            Log.d("FirebaseUser", "User is not authenticated")
-        }
+
         // Set user information in the fragment
         //val user = Firebase.auth.currentUser
         user?.let {
