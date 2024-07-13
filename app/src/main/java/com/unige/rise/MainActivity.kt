@@ -142,7 +142,6 @@ class MainActivity : AppCompatActivity() {
 
         // Logout
         builder.setPositiveButton("Logout") { dialog: DialogInterface, i: Int -> signOut() }
-        //builder.setPositiveButton("Logout") { dialog: DialogInterface, i: Int -> dialog.dismiss() }
 
         // Do nothing
         builder.setNegativeButton("Cancel") { dialog: DialogInterface, i: Int -> dialog.dismiss() }
@@ -158,15 +157,5 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-        /*
-        AuthUI.getInstance()
-            .signOut(this)
-            .addOnCompleteListener {
-                val intent = Intent(this, AuthActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(intent)
-                finish()
-            }
-        */
     }
 }

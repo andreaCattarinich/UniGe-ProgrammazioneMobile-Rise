@@ -56,8 +56,7 @@ class HomeFragment : Fragment() {
 
         mGoogleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
 
-        val auth = Firebase.auth
-        val user = auth.currentUser
+        val user = Firebase.auth.currentUser
 
         if (user != null) {
             if(user.isAnonymous) {

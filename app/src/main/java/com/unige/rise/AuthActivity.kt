@@ -29,9 +29,9 @@ class AuthActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
 
-        val currentUser = auth.currentUser
+        val user = auth.currentUser
 
-        if (currentUser != null) {
+        if (user != null && !(user.isAnonymous)) {
             // The user is already signed in, navigate to MainActivity
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)

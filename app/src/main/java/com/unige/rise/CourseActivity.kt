@@ -6,11 +6,12 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import com.google.firebase.Firebase
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.squareup.picasso.Picasso
 import com.unige.rise.databinding.ActivityCourseBinding
-import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
 
 class CourseActivity : AppCompatActivity() {
 
@@ -27,8 +28,14 @@ class CourseActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        val currentUser = FirebaseAuth.getInstance().currentUser
-        if (currentUser != null) {
+        val user = Firebase.auth.currentUser
+
+        if(user == null || user.isAnonymous){
+            Toast.makeText(this, "Please sign-in!", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, AuthActivity::class.java)
+            startActivity(intent)
+            finish()
+        } else {
             db = FirebaseDatabase.getInstance().reference
 
             val id : String = intent.extras?.getString("id") ?: "0"
@@ -52,12 +59,6 @@ class CourseActivity : AppCompatActivity() {
                 intent.putExtra("courseId", id)
                 startActivity(intent)
             }
-
-        } else {
-            //viewModel.updateTitleText("You're not logged in!")
-            val intent = Intent(this, AuthActivity::class.java)
-            startActivity(intent)
-            finish()
         }
     }
 }
