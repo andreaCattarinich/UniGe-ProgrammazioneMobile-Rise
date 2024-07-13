@@ -14,6 +14,8 @@ class AuthActivity : AppCompatActivity() {
     // Finalmente ho fatto il merge
     private lateinit var binding : ActivityAuthBinding
 
+    // Create an ActivityResultLauncher which registers a callback
+    // for the FirebaseUI Activity result contract
     private val signInLauncher = registerForActivityResult(
         FirebaseAuthUIActivityResultContract(),
     ) { res ->
@@ -51,6 +53,7 @@ class AuthActivity : AppCompatActivity() {
     }
 
     private fun onSignInResult(result: FirebaseAuthUIAuthenticationResult) {
+        val response = result.idpResponse
         if (result.resultCode == RESULT_OK) {
             // Successfully signed in
             val user = FirebaseAuth.getInstance().currentUser

@@ -53,16 +53,23 @@ class RvCoursesAdapter(private val courseList : java.util.ArrayList<Courses>) : 
                         .document("course${position+1}")
                         .get()
                         .addOnSuccessListener { data ->
-                            val courseCompletion = data.get("score").toString().toInt()
+                            //val courseCompletion = data.get("score").toString().toInt()
+                            val score = data.get("score")
 
-                            when (courseCompletion) {
-                                in 0..30 -> tvCourseCompletion.setTextColor(android.graphics.Color.RED)
-                                in 31..70 -> tvCourseCompletion.setTextColor(android.graphics.Color.YELLOW)
-                                else -> tvCourseCompletion.setTextColor(android.graphics.Color.GREEN)
+                            if(score != null) {
+                                val courseCompletion = score.toString().toInt()
+                                when (courseCompletion) {
+                                    in 0..30 -> tvCourseCompletion.setTextColor(android.graphics.Color.RED)
+                                    in 31..70 -> tvCourseCompletion.setTextColor(android.graphics.Color.YELLOW)
+                                    else -> tvCourseCompletion.setTextColor(android.graphics.Color.GREEN)
+                                }
+                                tvCourseCompletion.text = "${courseCompletion}%"
+
+                                Picasso.get().load(currentItem.imgUrl).into(imgItem)
+                            } else {
+                                tvCourseCompletion.setTextColor(android.graphics.Color.RED)
+                                tvCourseCompletion.text = "0%"
                             }
-                            tvCourseCompletion.text = "${courseCompletion}%"
-
-                            Picasso.get().load(currentItem.imgUrl).into(imgItem)
                         }
                 }
             }

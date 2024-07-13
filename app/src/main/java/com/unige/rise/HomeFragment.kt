@@ -2,6 +2,7 @@ package com.unige.rise
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,8 +52,22 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Set user information in the fragment
         val user = Firebase.auth.currentUser
+        if (user != null) {
+            Log.d("FirebaseUser", "User is authenticated")
+            val name = user.displayName
+            if (name != null) {
+                val firstName = name.split(" ").first()
+                Log.d("FirebaseUser", "User's first name: $firstName")
+                viewModel.updateWelcomeText(firstName)
+            } else {
+                Log.d("FirebaseUser", "Display name is null")
+            }
+        } else {
+            Log.d("FirebaseUser", "User is not authenticated")
+        }
+        // Set user information in the fragment
+        //val user = Firebase.auth.currentUser
         user?.let {
             val name = it.displayName?.split(" ")?.first()
             if (name != null) {

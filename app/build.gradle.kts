@@ -66,12 +66,12 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.0")
 
     // Firebase
-    implementation(platform("com.google.firebase:firebase-bom:33.1.1"))
+    implementation(platform("com.google.firebase:firebase-bom:33.1.2"))
     implementation("com.google.firebase:firebase-firestore")
 
     // Firebase authentication
-    implementation("com.google.firebase:firebase-auth")
-
+    //implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-auth:23.0.0")
     implementation("com.firebaseui:firebase-ui-auth:8.0.2")
 
     // if you target Android 12
