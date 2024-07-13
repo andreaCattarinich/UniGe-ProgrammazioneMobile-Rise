@@ -2,7 +2,6 @@
   "courses": [
     null,
     {
-      "id": "1",
       "imgUrl": "https://firebasestorage.googleapis.com/v0/b/rise-naba-unige.appspot.com/o/courses%2F1.png?alt=media&token=45899277-c565-45a3-af2a-ece59254c80b",
       "title": "i 5 migliori conti deposito",
       "subtitle": "Analizzeremo il concetto di inflazione e le principali cause",
@@ -10,19 +9,16 @@
       "quiz": [
         null,
         {
-          "id": "1",
           "question": "Un conto deposito offre generalmente un tasso di interesse più alto rispetto a un conto corrente",
           "response": true
         },
         {
-          "id": "2",
           "question": "I fondi depositati in un conto deposito non possono essere ritirati prima della scadenza senza penali",
           "response": false
         }
       ]
     },
     {
-      "id": "2",
       "imgUrl": "https://firebasestorage.googleapis.com/v0/b/rise-naba-unige.appspot.com/o/courses%2F2.png?alt=media&token=45899277-c565-45a3-af2a-ece59254c80b",
       "title": "Quanto conviene comprare la nuova macchina nel 2024",
       "subtitle": "Analizzeremo il concetto di inflazione e le principali cause",
@@ -30,19 +26,16 @@
       "quiz": [
         null,
         {
-          "id": "1",
           "question": "Il valore di una macchina nuova tende a deprezzarsi rapidamente nei primi anni",
           "response": true
         },
         {
-          "id": "2",
           "question": "Comprare una macchina usata è sempre più conveniente di comprarne una nuova",
           "response": false
         }
       ]
     },
     {
-      "id": "3",
       "imgUrl": "https://firebasestorage.googleapis.com/v0/b/rise-naba-unige.appspot.com/o/courses%2F3.png?alt=media&token=45899277-c565-45a3-af2a-ece59254c80b",
       "title": "Quando iniziare un piano di accumulo",
       "subtitle": "Analizzeremo il concetto di inflazione e le principali cause",
@@ -50,18 +43,36 @@
       "quiz": [
         null,
         {
-          "id": "1",
           "question": "Un piano di accumulo prevede l'investimento di una somma fissa a intervalli regolari",
           "response": true
         },
         {
-          "id": "2",
           "question": "I piani di accumulo non consentono di ridurre il rischio di mercato",
           "response": false
         },
         {
-          "id": "3",
           "question": "Questa risposta è vera o falsa? (Risposta corretta: vera)",
+          "response": true
+        }
+      ]
+    },
+    {
+      "imgUrl": "https://firebasestorage.googleapis.com/v0/b/rise-naba-unige.appspot.com/o/courses%2F4.png?alt=media&token=45899277-c565-45a3-af2a-ece59254c80b",
+      "title": "Costi di gestione",
+      "subtitle": "Analizzeremo il concetto di inflazione e le principali cause",
+      "description": "Benvenuti a questa guida dedicata all'inflazione.\nAnalizzeremo il concetto di inflazione e le principali cause , come ad esempio l'aumento della domanda rispetto all'offerta, i costi di produzione crescenti e la politica monetaria dei governi e delle banche centrali. Vedremo anche come l'inflazione possa influenzare il potere d'acquisto delle persone, i risparmi, i tassi di interesse.\n\nChe tu sia uno studente di economia alle prime armi o semplicemente interessato a capire meglio il funzionamento dell'economia, questo video ti offrirà una panoramica chiara e completa sull'argomento dell'inflazione e sui suoi impatti sulla società.",
+      "quiz": [
+        null,
+        {
+          "question": "Bianco o nero?",
+          "response": true
+        },
+        {
+          "question": "Prova",
+          "response": false
+        },
+        {
+          "question": "Ciao",
           "response": true
         }
       ]

@@ -39,17 +39,20 @@ class CourseActivity : AppCompatActivity() {
             db = FirebaseDatabase.getInstance().reference
 
             val id : String = intent.extras?.getString("id") ?: "0"
-            db.child("courses").child(id).get().addOnSuccessListener { dataSnapshot ->
-                val title = dataSnapshot.child("title").getValue(String::class.java)
-                val subtitle = dataSnapshot.child("subtitle").getValue(String::class.java)
-                val description = dataSnapshot.child("description").getValue(String::class.java)
-                val imgUrl = dataSnapshot.child("imgUrl").getValue(String::class.java)
+            db.child("courses")
+                .child(id)
+                .get()
+                .addOnSuccessListener { result ->
+                    val title       = result.child("title").getValue(String::class.java).toString()
+                    val subtitle    = result.child("subtitle").getValue(String::class.java).toString()
+                    val description = result.child("description").getValue(String::class.java).toString()
+                    val imgUrl      = result.child("imgUrl").getValue(String::class.java).toString()
 
-                viewModel.updateTitleText(title.toString())
-                viewModel.updateSubtitleText(subtitle.toString())
-                viewModel.updateDescriptionText(description.toString())
+                    viewModel.updateTitleText(title)
+                    viewModel.updateSubtitleText(subtitle)
+                    viewModel.updateDescriptionText(description)
 
-                Picasso.get().load(imgUrl).into(binding.image)
+                    Picasso.get().load(imgUrl).into(binding.image)
             }.addOnFailureListener {
                 Toast.makeText(this, "Something goes wrong", Toast.LENGTH_SHORT).show()
             }
