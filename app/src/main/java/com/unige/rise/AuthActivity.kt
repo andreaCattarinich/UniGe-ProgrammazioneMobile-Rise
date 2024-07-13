@@ -3,6 +3,7 @@ package com.unige.rise
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -23,7 +24,7 @@ class AuthActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.activity_auth)
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_auth)
 
         auth = FirebaseAuth.getInstance()
@@ -37,10 +38,11 @@ class AuthActivity : AppCompatActivity() {
             finish() // finish the current activity to prevent the user from coming back to the SignInActivity using the back button
         }
 
-        binding.btnLoginGoogle.setOnClickListener{ signIn() }
+        binding.btnLoginGoogle.setOnClickListener{ signInGoogle() }
+        binding.btnLoginAnonymous.setOnClickListener{ signInAnonymously()}
     }
 
-    private fun signIn() {
+    private fun signInGoogle() {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
@@ -79,5 +81,31 @@ class AuthActivity : AppCompatActivity() {
                 }
             }
     }
+
+    private fun signInAnonymously() {
+        auth.signInAnonymously()
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d("AnonymousAuth", "signInAnonymously:success")
+
+                    //val user = auth.currentUser
+                    Toast.makeText(this, "Signed in as Anonymous", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this, MainActivity::class.java))
+                    finish()
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w("AnonymousAuth", "signInAnonymously:failure", task.exception)
+                    Toast.makeText(
+                        baseContext,
+                        "Authentication failed.",
+                        Toast.LENGTH_SHORT,
+                    ).show()
+                }
+            }
+    }
+
 }
 
+// reference to Sign-In with Google:
+// https://visualandroidblog.blogspot.com/2023/04/google-sign-in-firebase-android-kotlin-tutorial.html

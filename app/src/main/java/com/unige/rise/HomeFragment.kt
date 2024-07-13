@@ -2,7 +2,6 @@ package com.unige.rise
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +15,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.firestore.FirebaseFirestore
 import com.unige.rise.adapter.RvCoursesAdapter
 import com.unige.rise.databinding.FragmentHomeBinding
 import com.unige.rise.models.Courses
@@ -26,7 +24,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
-import com.google.firebase.firestore.firestore
 
 class HomeFragment : Fragment() {
 
@@ -34,17 +31,13 @@ class HomeFragment : Fragment() {
     private lateinit var binding : FragmentHomeBinding
     private val viewModel : HomeViewModel by viewModels()
 
-    private lateinit var firebaseAuth : FirebaseAuth
-    private lateinit var db : FirebaseFirestore
+    // Sign-in
+    private lateinit var mGoogleSignInClient: GoogleSignInClient
+    private lateinit var mAuth: FirebaseAuth
 
     // Recycler View
     private lateinit var coursesList : ArrayList<Courses>
     private lateinit var firebaseRef : DatabaseReference
-
-
-
-    private lateinit var mGoogleSignInClient: GoogleSignInClient
-    private lateinit var mAuth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,52 +47,34 @@ class HomeFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
-        /***** start GOOGLE SIGN-IN *****/
         mAuth = FirebaseAuth.getInstance()
-
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
 
-        //mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
         mGoogleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
 
         val auth = Firebase.auth
         val user = auth.currentUser
 
         if (user != null) {
-            val userName = user.displayName.toString()
-            viewModel.updateWelcomeText(userName)
+            if(user.isAnonymous) {
+                viewModel.updateWelcomeText("Anon")
+            } else {
+                val name = user.displayName?.split(" ")?.first().toString()
+                viewModel.updateWelcomeText(name)
+            }
         } else {
-            // Handle the case where the user is not signed in
+            Toast.makeText(context, "User not logged", Toast.LENGTH_SHORT).show()
         }
-
-        /***** end GOOGLE SIGN-IN  *****/
-
-
 
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val user = Firebase.auth.currentUser
-
-        // Set user information in the fragment
-        //val user = Firebase.auth.currentUser
-        user?.let {
-            val name = it.displayName?.split(" ")?.first()
-            if (name != null) {
-                viewModel.updateWelcomeText(name)
-            }
-        }
-
-        // Get instances
-        db = Firebase.firestore
-        firebaseAuth = FirebaseAuth.getInstance()
 
         // Recycler View
         firebaseRef = FirebaseDatabase.getInstance().getReference("courses")
@@ -129,7 +104,6 @@ class HomeFragment : Fragment() {
                 rvAdapter.setOnItemClickListener(object : RvCoursesAdapter.OnItemClickListener{
                     override fun onItemClick(position: Int) {
                         //Toast.makeText(requireContext(), "Clicked on $position", Toast.LENGTH_SHORT).show()
-                        //val test = coursesList[position]
 
                         val intent = Intent(requireContext(), CourseActivity::class.java)
                         intent.putExtra("id", coursesList[position].id)
@@ -143,7 +117,6 @@ class HomeFragment : Fragment() {
             override fun onCancelled(error: DatabaseError) {
                 Toast.makeText(context, " error : $error", Toast.LENGTH_SHORT).show()
             }
-
         })
     }
 }
