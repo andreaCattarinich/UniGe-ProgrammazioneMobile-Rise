@@ -33,7 +33,7 @@ class HomeFragment : Fragment() {
 
     // Sign-in
     private lateinit var mGoogleSignInClient: GoogleSignInClient
-    private lateinit var mAuth: FirebaseAuth
+    private lateinit var auth: FirebaseAuth
 
     // Recycler View
     private lateinit var coursesList : ArrayList<Courses>
@@ -47,7 +47,7 @@ class HomeFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
-        mAuth = FirebaseAuth.getInstance()
+        auth = FirebaseAuth.getInstance()
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
@@ -97,6 +97,7 @@ class HomeFragment : Fragment() {
                         coursesList.add(courses!!)
                     }
                 }
+
                 val rvAdapter = RvCoursesAdapter(coursesList)
                 binding.rvCourses.adapter = rvAdapter
 
@@ -119,5 +120,3 @@ class HomeFragment : Fragment() {
         })
     }
 }
-
-

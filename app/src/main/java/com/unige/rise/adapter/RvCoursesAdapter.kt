@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.Firebase
-import com.google.firebase.auth.auth
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
 import com.squareup.picasso.Picasso
@@ -12,8 +12,12 @@ import com.unige.rise.databinding.RvCourseItemBinding
 import com.unige.rise.models.Courses
 
 class RvCoursesAdapter(private val courseList : java.util.ArrayList<Courses>) : RecyclerView.Adapter<RvCoursesAdapter.ViewHolder>() {
+
     // for OnClick RecyclerView items
     private lateinit var mListener: OnItemClickListener
+
+    private lateinit var db : FirebaseFirestore
+    private lateinit var auth: FirebaseAuth
 
     interface OnItemClickListener {
         fun onItemClick(position : Int)
@@ -42,38 +46,43 @@ class RvCoursesAdapter(private val courseList : java.util.ArrayList<Courses>) : 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = courseList[position]
         holder.apply {
-            binding.apply {
-                tvTitleItem.text = currentItem.title
-                tvSubtitleItem.text = currentItem.subtitle
-                //tvCourseCompletion.text =
-                val db : FirebaseFirestore = Firebase.firestore
-                val user = Firebase.auth.currentUser
-                if (user != null) {
-                    db.collection(user.uid)
-                        .document("course${position+1}")
-                        .get()
-                        .addOnSuccessListener { data ->
-                            //val courseCompletion = data.get("score").toString().toInt()
-                            val score = data.get("score")
+            binding.tvTitleItem.text = currentItem.title
+            binding.tvSubtitleItem.text = currentItem.subtitle
+            Picasso.get().load(currentItem.imgUrl).into(binding.imgItem)
 
-                            if(score != null) {
-                                val courseCompletion = score.toString().toInt()
-                                when (courseCompletion) {
-                                    in 0..30 -> tvCourseCompletion.setTextColor(android.graphics.Color.RED)
-                                    in 31..70 -> tvCourseCompletion.setTextColor(android.graphics.Color.YELLOW)
-                                    else -> tvCourseCompletion.setTextColor(android.graphics.Color.GREEN)
-                                }
-                                tvCourseCompletion.text = "${courseCompletion}%"
+            // Get from Firebase Database user's scores
+            auth = FirebaseAuth.getInstance()
 
-                                Picasso.get().load(currentItem.imgUrl).into(imgItem)
-                            } else {
-                                tvCourseCompletion.setTextColor(android.graphics.Color.RED)
-                                tvCourseCompletion.text = "0%"
-                            }
-                        }
-                }
+            val user = auth.currentUser
+            db = Firebase.firestore
+
+            if(user!!.isAnonymous) {
+                return
             }
+
+            db.collection(user.uid)
+                .document("course${position + 1}")
+                .get()
+                .addOnSuccessListener { document ->
+                    var currentScore = 0
+                    val score = document.data?.get("score")
+
+                    if(score != null) {
+                        currentScore = (score as Long).toInt()
+                    }
+
+                    when (currentScore) {
+                        in 31..70 -> binding.tvCourseCompletion.setTextColor(android.graphics.Color.YELLOW)
+                        in 71..100 -> binding.tvCourseCompletion.setTextColor(android.graphics.Color.GREEN)
+                        else -> binding.tvCourseCompletion.setTextColor(android.graphics.Color.RED)
+                    }
+
+                    binding.tvCourseCompletion.text = "${currentScore}%"
+                }
         }
     }
-
 }
+
+// Firebase storage into RecyclerView references:
+// Github: https://github.com/MohsenMashkour/FirebaseRealtimeExample
+// YouTube: https://www.youtube.com/watch?v=_eTZowmape8&t=1s

@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     private lateinit var mGoogleSignInClient: GoogleSignInClient
-    private lateinit var mAuth: FirebaseAuth
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.setupNavigationDrawerData()
 
 
-        mAuth = FirebaseAuth.getInstance()
+        auth = FirebaseAuth.getInstance()
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
@@ -150,7 +150,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun signOut() {
-        mAuth.signOut()
+        auth.signOut()
 
         mGoogleSignInClient.signOut().addOnCompleteListener(this) {
             val intent = Intent(this, AuthActivity::class.java)
