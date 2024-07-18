@@ -3,6 +3,183 @@
     null,
     {
       "imgUrl": "https://firebasestorage.googleapis.com/v0/b/rise-naba-unige.appspot.com/o/courses%2F1.png?alt=media&token=45899277-c565-45a3-af2a-ece59254c80b",
+      "title": "Guida ai Conti Deposito",
+      "subtitle": "Come sfruttare al meglio i conti deposito per i tuoi risparmi",
+      "description": "Il corso sui conti deposito fornirà una comprensione approfondita di questo strumento finanziario, esplorando i suoi vantaggi e svantaggi, le diverse tipologie disponibili, e come scegliere il conto deposito più adatto alle tue esigenze. Imparerai a conoscere i tassi di interesse, la capitalizzazione degli interessi, e i rischi associati. Inoltre, verranno affrontate le normative fiscali e la protezione dei depositi. Il corso includerà anche consigli pratici su come utilizzare i conti deposito come parte di una strategia di risparmio e investimento.",
+      "quiz": [
+        null,
+        {
+          "question": "I conti deposito offrono generalmente tassi di interesse più alti rispetto ai conti correnti tradizionali.",
+          "response": true
+        },
+        {
+          "question": "I conti deposito non sono soggetti a imposte sui rendimenti.",
+          "response": false
+        },
+        {
+          "question": "È possibile prelevare denaro da un conto deposito in qualsiasi momento senza penalità.",
+          "response": false
+        },
+        {
+          "question": "Il Fondo Interbancario di Tutela dei Depositi garantisce i conti deposito fino a 100.000 euro per depositante.",
+          "response": true
+        },
+        {
+          "question": "I conti deposito a scadenza vincolata offrono solitamente tassi di interesse più elevati rispetto ai conti deposito liberi.",
+          "response": true
+        }
+      ]
+    },
+    {
+      "imgUrl": "https://firebasestorage.googleapis.com/v0/b/rise-naba-unige.appspot.com/o/courses%2F2.png?alt=media&token=45899277-c565-45a3-af2a-ece59254c80b",
+      "title": "Acquisto di una Macchina: Strategie e Consigli",
+      "subtitle": "Dal Budget alla Consegna: Tutto Quello che Devi Sapere",
+      "description": "Questo corso ti guiderà attraverso tutte le fasi dell'acquisto di una macchina, dalla pianificazione del budget alla scelta del veicolo giusto per le tue esigenze. Esamineremo le differenze tra l'acquisto di un'auto nuova e usata, le opzioni di finanziamento disponibili, e i costi associati all'auto (assicurazione, manutenzione, carburante). Tratteremo anche come negoziare il prezzo, le caratteristiche da considerare in base al tuo stile di vita e le procedure amministrative necessarie. Il corso ti fornirà strumenti e conoscenze per fare una scelta informata e ottimizzare il tuo investimento.",
+      "quiz": [
+        null,
+        {
+          "question": "Acquistare un'auto usata è sempre più conveniente rispetto a una nuova.",
+          "response": false
+        },
+        {
+          "question": "La manutenzione di un'auto usata può essere più costosa rispetto a quella di un'auto nuova.",
+          "response": true
+        },
+        {
+          "question": "Il leasing è un'opzione di finanziamento che ti permette di possedere l'auto alla fine del contratto.",
+          "response": false
+        },
+        {
+          "question": "La valutazione delle tue esigenze personali è un passo cruciale nella scelta dell'auto giusta.",
+          "response": true
+        },
+        {
+          "question": "La garanzia offerta sulle auto nuove copre solitamente anche i danni causati da incidenti.",
+          "response": false
+        }
+      ]
+    },
+    {
+      "imgUrl": "https://firebasestorage.googleapis.com/v0/b/rise-naba-unige.appspot.com/o/courses%2F3.png?alt=media&token=45899277-c565-45a3-af2a-ece59254c80b",
+      "title": "Gestione dei Risparmi: Tenere i Soldi Fissi sul Conto",
+      "subtitle": "Pro e Contro della Liquidità in Eccesso",
+      "description": "In questo corso esploreremo i vantaggi e gli svantaggi di mantenere i risparmi in un conto corrente, analizzando l'importanza della liquidità, i rischi di inflazione, e le opportunità mancate di rendimento. Discuteremo alternative come i conti deposito, gli investimenti a breve termine, e i fondi di emergenza. Imparerai a bilanciare la necessità di accesso immediato al denaro con la crescita del patrimonio, e a valutare le tue esigenze finanziarie personali per fare scelte informate sul mantenimento della liquidità.",
+      "quiz": [
+        null,
+        {
+          "question": "Tenere troppa liquidità in un conto corrente può comportare una perdita di potere d'acquisto a causa dell'inflazione.",
+          "response": true
+        },
+        {
+          "question": "I conti correnti offrono solitamente tassi di interesse elevati.",
+          "response": false
+        },
+        {
+          "question": "Avere un fondo di emergenza è una buona ragione per mantenere una certa quantità di liquidità sul conto.",
+          "response": true
+        },
+        {
+          "question": "Investire in conti deposito può essere una buona alternativa al mantenimento della liquidità in un conto corrente.",
+          "response": true
+        },
+        {
+          "question": "Non ci sono svantaggi nel mantenere tutti i risparmi in un conto corrente.",
+          "response": false
+        }
+      ]
+    },
+    {
+      "imgUrl": "https://firebasestorage.googleapis.com/v0/b/rise-naba-unige.appspot.com/o/courses%2F4.png?alt=media&token=45899277-c565-45a3-af2a-ece59254c80b",
+      "title": "Economia e Finanza Italiana: Una Panoramica",
+      "subtitle": "Comprendere il Sistema Economico e Finanziario Italiano",
+      "description": "Questo corso offre una visione d'insieme dell'economia e della finanza in Italia, coprendo temi come la struttura del mercato finanziario italiano, il ruolo delle banche, la politica fiscale e monetaria, e l'andamento dell'economia italiana negli ultimi decenni. Analizzeremo gli indicatori economici chiave, le sfide attuali come il debito pubblico e la disoccupazione, e le prospettive future. Inoltre, verranno discussi i principali settori economici italiani e il loro impatto sulla crescita economica.",
+      "quiz": [
+        null,
+        {
+          "question": "Il debito pubblico italiano è uno dei più alti in Europa.",
+          "response": true
+        },
+        {
+          "question": "La Banca d'Italia è responsabile della politica monetaria in Italia.",
+          "response": false
+        },
+        {
+          "question": "Il settore manifatturiero è uno dei pilastri dell'economia italiana.",
+          "response": true
+        },
+        {
+          "question": "L'economia italiana è stata in costante crescita negli ultimi dieci anni.",
+          "response": false
+        },
+        {
+          "question": "La disoccupazione giovanile è un problema significativo in Italia.",
+          "response": true
+        }
+      ]
+    },
+    {
+      "imgUrl": "https://firebasestorage.googleapis.com/v0/b/rise-naba-unige.appspot.com/o/courses%2F5.png?alt=media&token=45899277-c565-45a3-af2a-ece59254c80b",
+      "title": "Piani di Accumulo: Strategie di Risparmio e Investimento",
+      "subtitle": "Costruire un Patrimonio nel Tempo con Disciplina e Costanza",
+      "description": "Questo corso ti introdurrà ai piani di accumulo, spiegando come funzionano e come possono aiutarti a raggiungere i tuoi obiettivi finanziari a lungo termine. Discuteremo i vantaggi di investire regolarmente piccole somme, le differenze tra vari tipi di piani di accumulo (fondi comuni di investimento, ETF, ecc.), e l'importanza della diversificazione. Imparerai a pianificare il tuo piano di accumulo in base alle tue esigenze finanziarie e ai tuoi obiettivi di investimento, e come monitorare e adattare il piano nel tempo.",
+      "quiz": [
+        null,
+        {
+          "question": "I piani di accumulo richiedono l'investimento di grandi somme di denaro in un'unica soluzione.",
+          "response": false
+        },
+        {
+          "question": "Investire regolarmente attraverso un piano di accumulo può aiutare a ridurre l'impatto della volatilità del mercato.",
+          "response": true
+        },
+        {
+          "question": "I piani di accumulo non offrono la possibilità di diversificare gli investimenti.",
+          "response": false
+        },
+        {
+          "question": "È possibile modificare l'importo dei contributi in un piano di accumulo nel corso del tempo.",
+          "response": true
+        },
+        {
+          "question": "I piani di accumulo sono adatti solo per gli investitori esperti.",
+          "response": false
+        }
+      ]
+    },
+    {
+      "imgUrl": "https://firebasestorage.googleapis.com/v0/b/rise-naba-unige.appspot.com/o/courses%2F6.png?alt=media&token=45899277-c565-45a3-af2a-ece59254c80b",
+      "title": "Acquisto di una Casa: Guida Pratica",
+      "subtitle": "Dalla Ricerca al Finanziamento: Tutto Ciò che Devi Sapere",
+      "description": "Il corso sull'acquisto di una casa ti accompagnerà passo dopo passo nel processo di acquisto di un immobile. Tratteremo la ricerca della casa ideale, la valutazione del prezzo di mercato, le opzioni di finanziamento disponibili (mutui ipotecari, tassi fissi e variabili), e i costi associati all'acquisto (tasse, spese notarili, assicurazioni). Inoltre, imparerai a negoziare il prezzo, a comprendere i contratti di vendita, e a prepararti per il trasferimento e la gestione della proprietà. Il corso è pensato per aiutarti a prendere decisioni informate e a evitare comuni trappole nell'acquisto di una casa.",
+      "quiz": [
+        null,
+        {
+          "question": "È consigliabile ottenere una pre-approvazione del mutuo prima di iniziare la ricerca di una casa.",
+          "response": true
+        },
+        {
+          "question": "I mutui a tasso fisso sono generalmente più rischiosi dei mutui a tasso variabile.",
+          "response": false
+        },
+        {
+          "question": "Le spese notarili sono una delle componenti principali dei costi di acquisto di una casa.",
+          "response": true
+        },
+        {
+          "question": "È possibile acquistare una casa senza dover pagare alcuna tassa.",
+          "response": false
+        },
+        {
+          "question": "Negoziare il prezzo di vendita di una casa è una pratica comune e consigliabile.",
+          "response": true
+        }
+      ]
+    }
+  ],
+  "courses2": [
+    null,
+    {
+      "imgUrl": "https://firebasestorage.googleapis.com/v0/b/rise-naba-unige.appspot.com/o/courses%2F1.png?alt=media&token=45899277-c565-45a3-af2a-ece59254c80b",
       "title": "i 5 migliori conti deposito",
       "subtitle": "Analizzeremo il concetto di inflazione e le principali cause",
       "description": "Benvenuti a questa guida dedicata all'inflazione.\nAnalizzeremo il concetto di inflazione e le principali cause , come ad esempio l'aumento della domanda rispetto all'offerta, i costi di produzione crescenti e la politica monetaria dei governi e delle banche centrali. Vedremo anche come l'inflazione possa influenzare il potere d'acquisto delle persone, i risparmi, i tassi di interesse.\n\nChe tu sia uno studente di economia alle prime armi o semplicemente interessato a capire meglio il funzionamento dell'economia, questo video ti offrirà una panoramica chiara e completa sull'argomento dell'inflazione e sui suoi impatti sulla società.",

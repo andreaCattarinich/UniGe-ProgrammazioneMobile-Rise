@@ -12,6 +12,7 @@
 
         <include layout="@layout/app_bar_auth" />
 
+        <!--
         <Button
             android:id="@+id/btnLoginEmail"
             android:layout_width="wrap_content"
@@ -26,7 +27,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.5" />
-
+        -->
         <Button
             android:id="@+id/btnLoginGoogle"
             android:layout_width="wrap_content"
@@ -37,9 +38,11 @@
             android:text="@string/loginGoogle"
             android:textColor="@color/black"
             android:drawableLeft="@drawable/ic_google"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btnLoginEmail" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
 
         <Button
              android:id="@+id/btnLoginAnonymous"

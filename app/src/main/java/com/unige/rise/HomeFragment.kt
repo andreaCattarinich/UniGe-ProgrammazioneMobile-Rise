@@ -103,7 +103,7 @@ class HomeFragment : Fragment() {
 
                 rvAdapter.setOnItemClickListener(object : RvCoursesAdapter.OnItemClickListener{
                     override fun onItemClick(position: Int) {
-                        Toast.makeText(requireContext(), "Clicked on ${position + 1}", Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(requireContext(), "Clicked on ${position + 1}", Toast.LENGTH_SHORT).show()
                         //Toast.makeText(requireContext(), "Clicked on ${coursesList[position].id}", Toast.LENGTH_SHORT).show()
 
                         val intent = Intent(requireContext(), CourseActivity::class.java)

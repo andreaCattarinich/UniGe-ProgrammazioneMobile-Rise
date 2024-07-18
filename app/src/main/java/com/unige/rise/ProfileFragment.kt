@@ -25,7 +25,6 @@ class ProfileFragment : Fragment() {
     private lateinit var binding : FragmentProfileBinding
     private val viewModel : ProfileViewModel by viewModels()
 
-    private lateinit var auth: FirebaseAuth
     private lateinit var db : FirebaseFirestore
     private lateinit var realtimeDB: DatabaseReference
 
@@ -60,17 +59,14 @@ class ProfileFragment : Fragment() {
                     var totalScore = 0
                     for (course in result) {
                         //Log.d("RiseLOG", "${course.id} => ${course.data}")
-
                         totalScore += (course.get("score") as Long).toInt()
                     }
-
-                    //Log.d("RiseLOG", "Total score => $totalScore")
 
                     realtimeDB = FirebaseDatabase.getInstance().reference
                     realtimeDB.child("courses")
                         .get()
                         .addOnSuccessListener { data ->
-                            Log.d("RiseLOG", "N. corsi(2) = > ${data.childrenCount}")
+                            //Log.d("RiseLOG", "N. corsi(2) = > ${data.childrenCount}")
                             val completion = (totalScore/data.childrenCount).toInt()
 
                             when (completion) {

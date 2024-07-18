@@ -38,23 +38,9 @@ class QuizActivity : AppCompatActivity() {
 
         courseId = intent.extras?.getString("courseId") ?: "0"
 
-        realtimeDB.child("courses")
-            .child(courseId)
-            .get()
-            .addOnSuccessListener { dataSnapshot ->
+        viewModel.updateCourseId(courseId)
 
-                viewModel.updateCourseId(courseId)
-                viewModel.updateQuestionSize(dataSnapshot.child("quiz").childrenCount.toInt())
-
-                //Toast.makeText(this, viewModel.arrayQuestionSize.value.toString(), Toast.LENGTH_SHORT).show()
-                //Toast.makeText(this, viewModel.currentQuestionIndex.value.toString(), Toast.LENGTH_SHORT).show()
-                val question = dataSnapshot
-                    .child("quiz")
-                    .child("1")
-                    .child("question")
-                    .getValue(String::class.java)
-                viewModel.loadCurrentQuestion(question.toString())
-            }
+        loadNextQuestion(1)
 
         binding.trueBtn.setOnClickListener {
             val nextQuestion = viewModel.answer(true)
@@ -80,10 +66,12 @@ class QuizActivity : AppCompatActivity() {
         realtimeDB.child("courses")
             .child(courseId)
             .get()
-            .addOnSuccessListener { dataSnapshot ->
+            .addOnSuccessListener { result ->
+
+                viewModel.updateQuestionSize(result.child("quiz").childrenCount.toInt())
 
                 //Toast.makeText(this, viewModel.currentQuestionIndex.value.toString(), Toast.LENGTH_SHORT).show()
-                val question = dataSnapshot
+                val question = result
                     .child("quiz")
                     .child(nextQuestionIndex.toString())
                     .child("question")
