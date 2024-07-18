@@ -38,6 +38,7 @@ class AuthActivity : AppCompatActivity() {
             finish() // finish the current activity to prevent the user from coming back to the SignInActivity using the back button
         }
 
+        // TODO: Aggiungere l'autenticazione con Email (non usare Firebase-ui)
         binding.btnLoginGoogle.setOnClickListener{ signInGoogle() }
         binding.btnLoginAnonymous.setOnClickListener{ signInAnonymously()}
     }
